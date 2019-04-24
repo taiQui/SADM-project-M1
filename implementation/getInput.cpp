@@ -30,8 +30,11 @@ void input(string fileName,int* objectNumber,int* bagNumber,vector<int>* objectL
   ifstream file;
   file.open(fileName);
   if (file.is_open()){
+    cout<<"test"<<endl;
     string aux;
+    cout<<"test2"<<endl;
     getline(file,aux);
+    cout<<"test3"<<endl;
     string firstSplit[2];
     // Parsing first row
     cout <<"STEP 1 -----"<<endl;

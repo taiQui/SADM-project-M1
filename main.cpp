@@ -1,25 +1,53 @@
 #include <iostream>
 #include "header/getInput.hpp"
 #include <vector>
+// #include <pthread.h>
+#include <thread>
+// #include <ctime>
+#include <time.h>
 
 using namespace std;
 
+
+
+class timer {
+	private:
+		unsigned long begTime;
+	public:
+		void start() {
+			begTime = clock();
+		}
+
+		unsigned long elapsedTime() {
+			return ((unsigned long) clock() - begTime) / CLOCKS_PER_SEC;
+		}
+
+		bool isTimeout(unsigned long seconds) {
+			return seconds >= elapsedTime();
+		}
+};
+
+
 int main(int argc, char* argv[]){
-  // variables -----------------
-  string filename;
-  int objectNumber;
-  int bagNumber;
-  vector<int> objectList;
-  vector<int> bagCapacity;
-  vector<vector<int>> objectCharge;
-  // ----------------------------
   if (argc < 3){
     cout << "2 arguments are expected"<<endl;
     exit(-1);
   }
   cout << "Filename given : "<<argv[1]<<endl;
   cout << "Time max given : "<<argv[2]<<endl;
+  // variables -----------------
+  string filename;
   filename = argv[1];
+  int decompte = stoi(argv[2]);
+  int objectNumber;
+  int bagNumber;
+  vector<int> objectList;
+  vector<int> bagCapacity;
+  vector<vector<int>> objectCharge;
+  timer chrono;
+  chrono.start();
+  // ----------------------------
+  cout<<"Executing parsing"<<endl;
   input(filename,&objectNumber,&bagNumber,&objectList,&bagCapacity,&objectCharge);
   cout << "object number "<<objectNumber<<endl;
   cout << "bagnumber "<<bagNumber<<endl;
@@ -40,5 +68,9 @@ int main(int argc, char* argv[]){
     }
     cout <<endl;
   }
+  //to get time
+  // while (chrono.elapsedTime() < decompte){
+  //
+  // }
   return 0;
 }
