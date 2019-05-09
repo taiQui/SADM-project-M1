@@ -5,31 +5,12 @@
 #include <thread>
 // #include <ctime>
 #include <time.h>
+#include "header/geneticAlgorithm.hpp"
 
 using namespace std;
 
 
-
-class timer {
-	private:
-		unsigned long begTime;
-	public:
-		void start() {
-			begTime = clock();
-		}
-
-		unsigned long elapsedTime() {
-			return ((unsigned long) clock() - begTime) / CLOCKS_PER_SEC;
-		}
-
-		bool isTimeout(unsigned long seconds) {
-			return seconds >= elapsedTime();
-		}
-};
-
-
 int main(int argc, char* argv[]){
-	srand(time(NULL));
   if (argc < 3){
     cout << "2 arguments are expected"<<endl;
     exit(-1);
@@ -45,8 +26,7 @@ int main(int argc, char* argv[]){
   vector<int> objectList;
   vector<int> bagCapacity;
   vector<vector<int>> objectCharge;
-  timer chrono;
-  chrono.start();
+
   // ----------------------------
   cout<<"Executing parsing"<<endl;
   input(filename,&objectNumber,&bagNumber,&objectList,&bagCapacity,&objectCharge);
@@ -69,6 +49,8 @@ int main(int argc, char* argv[]){
     }
     cout <<endl;
   }
+	cout<<endl<<endl;
+	geneticAlgorithm(objectNumber,bagNumber,objectList,bagCapacity,objectCharge,decompte,1);
   //to get time
   // while (chrono.elapsedTime() < decompte){
   //

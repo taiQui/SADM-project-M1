@@ -3,9 +3,10 @@
 
 #include <iostream>
 #include <vector>
-#include "../header/Soluton.hpp"
+#include "../header/Solution.hpp"
 #include "../header/MB.hpp"
 #include <time.h>
+#include <fstream>
 
 using namespace std;
 
@@ -22,13 +23,19 @@ class timer {
 		}
 
 		unsigned long elapsedTime() {
+			cout<<"test elapsedTime"<<endl;
 			return ((unsigned long) clock() - begTime) / CLOCKS_PER_SEC;
 		}
 
-		bool isTimeout(unsigned long seconds) {
-			return seconds >= elapsedTime();
+		int isTimeout(unsigned long seconds) {
+			cout<<"test isTimeout"<<endl;
+			unsigned long yolo = elapsedTime();
+			cout<<"test isTimeout 2"<<endl;
+			cout<<"test is : "<<(seconds >= yolo)<<endl;
+			return seconds >= yolo;
 		}
 };
 
+void geneticAlgorithm (int,int,vector<int>,vector<int>,vector<vector<int>>,int,int);
 
 #endif
