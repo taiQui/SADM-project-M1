@@ -79,6 +79,14 @@ int* MB::find(Solutions sol){
   cout<<endl;
   returned[0] = index1;
   returned[1] = index2;
+  // cout<<"print"<<endl;
+  // for(int i= 0; i < sol.getNbsol(); i++){
+  //   cout<<value[i]<<endl;
+  // }
+  // cout<<endl;
+  // cout<<value[index1]<<"-"<<index1<<" : "<<value[index2]<<"-"<<index2<<endl;
+  // cout<<"----------"<<endl;
+
   return returned;
 }
 
@@ -194,7 +202,7 @@ int MB::getValue(vector<int> child){
   // for(int i =0; i < child.size();i++){
   //   cout<<child[i]<<" ";
   // }
-  cout<<endl;
+  // cout<<endl;
   for(int i = 0; i < child.size(); i++){
     if(child[i] == 1){
       compt+= this->_objectList[i];
