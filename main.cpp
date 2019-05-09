@@ -29,6 +29,7 @@ class timer {
 
 
 int main(int argc, char* argv[]){
+	srand(time(NULL));
   if (argc < 3){
     cout << "2 arguments are expected"<<endl;
     exit(-1);

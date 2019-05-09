@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cstdlib>
 
 using namespace std;
 
@@ -23,7 +24,8 @@ int getObjectByIndex(int,int);
 void setChoosenAtIndex(int,int,int);
 //function
 int* getValue(vector<int>);
-vector<vector<int>*> getParent();
+int getValueByIndex(int,vector<int>);
+vector<vector<int>*> getParent(vector<int>,int);
 };
 
 #endif

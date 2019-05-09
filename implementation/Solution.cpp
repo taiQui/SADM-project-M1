@@ -42,6 +42,58 @@ int Solutions::getNbsol(){
   return this->_nbSolutions;
 }
 
-vector<vector<int>*> Solutions::getParent(){
+int Solutions::getValueByIndex(int index,vector<int> value){
+  if(index >= this->_nbSolutions || index < 0) exit(-1);
+  int compt = 0;
+  for(int i = 0; i < value.size() ; i ++){
+    if(this->_choosen[index][i] == 1){
+      compt+=value[i];
+    }
+  }
+  return compt;
+}
+
+vector<vector<int>*> Solutions::getParent(vector<int> value,int nbParent){
+  nbParent *=2;
+  int tab[nbParent*2];
+  int index = 0;
+  while(index < nbParent){
+    int random = (rand()%this->_nbSolutions);
+    int i = 0;
+    bool good = true;
+    while( i < nbParent && good){
+      if (tab[i] == random ){
+          good = false;
+      }
+      i++;
+    }
+    if(good){
+      tab[index] = random;
+      index++;
+    }
+  }
+  for(int i = 0+nbParent; i < nbParent*2; i++){
+    tab[i] = this->getValueByIndex(tab[i],value);
+  }
+  vector<vector<int>*> returned;
+  int max = tab[nbParent];
+  int indexreturned = 0;
+  for(int i = 1; i < nbParent/2 ; i+=1){
+    if (max < tab[nbParent+i]){
+      max = tab[nbParent+i];
+      indexreturned = i;
+    }
+  }
+  returned[0]=&(this->_choosen[indexreturned]);
+  max = tab[(nbParent/2)+nbParent];
+  indexreturned = nbParent/2;
+  for(int i = 0; i < nbParent/2 ; i++){
+    if(max < tab[nbParent+(nbParent/2)+i]){
+      max = tab[nbParent+(nbParent/2)+i];
+      indexreturned = (nbParent/2)+i;
+    }
+  }
+  returned[1] = &(this->_choosen[indexreturned]);
+  return returned;
 
 }
