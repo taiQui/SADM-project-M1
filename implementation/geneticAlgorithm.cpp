@@ -1,78 +1,60 @@
 #include "../header/geneticAlgorithm.hpp"
 
 
+
 void geneticAlgorithm (int objectnumber, int bagnumber, vector<int> objectlist,vector<int> bagcapacity, vector<vector<int>> objectcharge,int tm,int verbose){
   /* Variable definitions
   */
   srand(time(NULL));
-  cout<<"test0"<<endl;
-  timer chrono;
-  cout<<"test1"<<endl;
-  chrono.start();
-  cout<<"test2"<<endl;
+  clock_t start = clock();
   MB* MultidimentionnalBackpack = new MB(objectnumber,bagnumber,objectlist,bagcapacity,objectcharge,1);
-  cout<<"test3"<<endl;
-  // compteurs
   int compt = 0;
-  //initialise
-
-  //fitness
+  //Solution's generation
   Solutions solutions;
-  cout<<"test4"<<endl;
   solutions.generate(MultidimentionnalBackpack);
-  //find best solution
-  cout<<"test5"<<endl;
-  while(compt < T_MAX ){
-    cout<<"test55"<<endl;
+  // get Best solutions before executing to compare
+  int* bestaux = NULL;
+  bestaux = MultidimentionnalBackpack->find(solutions);
+  // get best solutions from our list
+  vector<int> best = solutions.getChoosen(bestaux[1]);
+  cout <<"Before executing algorithm, our first solutions is : "<<MultidimentionnalBackpack->getValue(best)<<endl;
+  delete[] bestaux;
+  best.clear();
+  while(elapsedTime(start) < tm && compt < T_MAX ){
+    // Get 2 parents from genetic algorithmique technique
     vector<vector<int>*> parent = solutions.getParent(MultidimentionnalBackpack->getObjectList(),2);
-    cout <<"test6"<<endl;
     vector<int> child;
-    cout<<"first child"<<endl;
+    // Make a child with parents
     child = MultidimentionnalBackpack->crossover(parent);
-    for(int i = 0; i < child.size();i++){
-      cout<<child[i]<<" ";
-    }
-    cout<<endl;
-    cout<<"mutation child"<<endl;
+    // Mutate child
     child = MultidimentionnalBackpack->mutation(child);
-    for(int i = 0; i < child.size();i++){
-      cout<<child[i]<<" ";
-    }
-    cout<<endl;
-    cout<<"repair child"<<endl;
+    // Repair mutated child
     child =  MultidimentionnalBackpack->repair(child);
-    for(int i = 0; i < child.size();i++){
-      cout<<child[i]<<" ";
-    }
-    cout<<endl;
-    // child = MultidimentionnalBackpack->repair();
-    cout<<"test7"<<endl;
+    // if child doesn't belong to solutions list
     if(!solutions.belongTo(child)){
-      cout<<"test8"<<endl;
       int* bestandworst = NULL;
-      cout<<"test9"<<endl;
+      // find best and worst solutions ( index )
       bestandworst = MultidimentionnalBackpack->find(solutions);
-      cout<<"1 : "<<bestandworst[0]<<"|||  2 : "<<bestandworst[1]<<endl;
-      cout<<"test10"<<endl;
+      // swap worst in solutions's list wirh our child
       solutions.setChoosen(bestandworst[0],child);
-      cout<<"test11"<<endl;
-      int test1 =solutions.getValueByIndex(bestandworst[1],MultidimentionnalBackpack->getObjectList());
-      int test2 = MultidimentionnalBackpack->getValue(child);
-      cout<<"t1 : "<<test1<<endl<<"t2 : "<<test2<<endl;
-      if(test1 < test2){
-        cout<<"test12"<<endl;
+      // check if son have better score than best solutions from our list
+      // if it's true we swap better with our child
+      if(solutions.getValueByIndex(bestandworst[1],MultidimentionnalBackpack->getObjectList()) < MultidimentionnalBackpack->getValue(child)){
         solutions.setChoosen(bestandworst[1],child);
-        cout<<"test13"<<endl;
       }
+      // free pointer
+      delete[] bestandworst;
     }
     compt++;
   }
-
-  int* bestaux = NULL;
+  if (elapsedTime(start)>=tm) cout<<"Time out ! "<<endl;
   bestaux = MultidimentionnalBackpack->find(solutions);
-  vector<int> best = solutions.getChoosen(bestaux[1]);
+  // get best solutions from our list
+  best = solutions.getChoosen(bestaux[1]);
   int nbobject = 0;
   vector<int> objectselected;
+  // get Number of object selected in best solutions
+  // get all selected objects
   for(int i = 0; i < best.size();i++){
     if(best[i] == 1){
       nbobject++;
@@ -86,5 +68,13 @@ void geneticAlgorithm (int objectnumber, int bagnumber, vector<int> objectlist,v
   for(int i = 0; i < objectselected.size() ; i++){
     file<<objectselected[i]<<" ";
   }
+  delete[] bestaux;
 
+
+}
+
+
+int elapsedTime(clock_t start){
+  int dif = (std::clock() - start) / (double)CLOCKS_PER_SEC;
+  return dif;
 }

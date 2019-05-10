@@ -56,13 +56,6 @@ int* MB::find(Solutions sol){
   int* value = sol.getValue(this->getObjectList());
   int min = value[0];
   int max = value[0];
-  cout<<"Value : "<<endl;
-  for(int i =0; i < sol.getNbsol();i++){
-    cout<<value[i]<<" ";
-  }
-  cout<<"------------------------------"<<endl;
-  cout<<endl;
-  cout<<"RETURN --------------"<<endl;
   int index1 = 0;
   int index2 = 0;
   for(int i = 1; i < sol.getNbsol(); i++){
@@ -76,9 +69,8 @@ int* MB::find(Solutions sol){
       min = value[i];
     }
   }
-  cout<<endl;
-  returned[0] = index1;
-  returned[1] = index2;
+  returned[0] = index2;
+  returned[1] = index1;
   // cout<<"print"<<endl;
   // for(int i= 0; i < sol.getNbsol(); i++){
   //   cout<<value[i]<<endl;
@@ -152,38 +144,15 @@ vector<int> MB::repair(vector<int> childmutated){
   for(int j = 0; j < this->_bagNumber; j++){
     weightByBag.push_back(this->getValueWeight(childmutated,j));
   }
-  cout<<endl;
-  cout<<"-----------------------"<<endl;
-  for(int i = 0; i < weightByBag.size();i++){
-    cout<<weightByBag[i]<<" ";
-  }
-  cout<<endl;
-  cout<<"----"<<endl;
   while(i >= 0 && !this->bagCheck(weightByBag)){
     if(childmutated[i] == 1 && !this->bagCheck(weightByBag)){
       childmutated[i] = !childmutated[i];
       for(int j = 0; j < weightByBag.size();j++){
-        // cout<<"sub : "<<this->_objectCharge[j][i]<<endl;
-        cout<<"test : "<<weightByBag[j]<<endl;
         weightByBag[j] -= this->_objectCharge[j][i];
-        cout<<"test2 : "<<weightByBag[j]<<endl;
-        // cout<<"weight : "<<weightByBag.size()<<"   &&&&&&&&&&& "<<endl;
-        // for(int j = 0; j < weightByBag.size();j++){
-        //   cout<<weightByBag[i]<<" ";
-        // }
-        // cout<<"&&&&&&&&&&&&&&&&&&&&&&&&&&"<<endl;
       }
     }
     i--;
-    // cout<<"test weight : "<<this->bagCheck(weightByBag)<<endl;
-
   }
-  cout<<"---------------------"<<endl;
-  cout<<"repair "<<endl;
-  for(int i = 0; i < childmutated.size();i++){
-    cout<<childmutated[i]<<" ";
-  }
-  cout<<endl;
   for(int i = 0; i < childmutated.size();i++){
     if(childmutated[i] == 0 && this->bagCheckAfterAdd(i,weightByBag) ){
       childmutated[i] = 1;
@@ -192,17 +161,11 @@ vector<int> MB::repair(vector<int> childmutated){
       }
     }
   }
-  cout<<"----------------------"<<endl;
   return childmutated;
 }
 
 int MB::getValue(vector<int> child){
   int compt = 0;
-  // cout<<"child : "<<endl;
-  // for(int i =0; i < child.size();i++){
-  //   cout<<child[i]<<" ";
-  // }
-  // cout<<endl;
   for(int i = 0; i < child.size(); i++){
     if(child[i] == 1){
       compt+= this->_objectList[i];

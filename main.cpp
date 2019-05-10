@@ -30,26 +30,26 @@ int main(int argc, char* argv[]){
   // ----------------------------
   cout<<"Executing parsing"<<endl;
   input(filename,&objectNumber,&bagNumber,&objectList,&bagCapacity,&objectCharge);
-  cout << "object number "<<objectNumber<<endl;
-  cout << "bagnumber "<<bagNumber<<endl;
-  cout << "objectList : "<<endl;
-  for(int i = 0; i < objectList.size();i++){
-    cout <<objectList[i]<<"-";
-  }
-  cout<<endl;
-  cout <<"Bag capacity : ";
-  for (int i = 0; i < bagCapacity.size(); i++){
-    cout << bagCapacity[i]<<"-";
-  }
-  cout <<endl;
-  for(int i = 0; i < objectCharge.size() ; i++){
-    cout <<"object constraint for bag "<<i<<" : ";
-    for(int j = 0 ; j < objectCharge[i].size(); j++){
-      cout <<objectCharge[i][j]<<"-";
-    }
-    cout <<endl;
-  }
-	cout<<endl<<endl;
+  // cout << "object number "<<objectNumber<<endl;
+  // cout << "bagnumber "<<bagNumber<<endl;
+  // cout << "objectList : "<<endl;
+  // for(int i = 0; i < objectList.size();i++){
+  //   cout <<objectList[i]<<"-";
+  // }
+  // cout<<endl;
+  // cout <<"Bag capacity : ";
+  // for (int i = 0; i < bagCapacity.size(); i++){
+  //   cout << bagCapacity[i]<<"-";
+  // }
+  // cout <<endl;
+  // for(int i = 0; i < objectCharge.size() ; i++){
+  //   cout <<"object constraint for bag "<<i<<" : ";
+  //   for(int j = 0 ; j < objectCharge[i].size(); j++){
+  //     cout <<objectCharge[i][j]<<"-";
+  //   }
+  //   cout <<endl;
+  // }
+	// cout<<endl<<endl;
 	geneticAlgorithm(objectNumber,bagNumber,objectList,bagCapacity,objectCharge,decompte,1);
   //to get time
   // while (chrono.elapsedTime() < decompte){
