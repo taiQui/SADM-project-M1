@@ -37,22 +37,14 @@ public:
   int getObjectChargeByBag(int,int);
   //function
   /*
-  find return best and worst index's solutions
-  in input we have All solutions
-
-  crossover return child from 2 parents get from solutions
-  in input we have 2 parent
-
-  mutation return child mutated where some bit are flipped
-  in input we have child
-
-  getValueWeigt return for a input object array the weight associated
-
-  bagcheck return if input array weight is greather than bag capacity
-
-  bagcheckafteradd return if after a adding object if capacity is still good
-
-  repair return mutatedchild which respect constraint
+  find retournes l'index de la pire et de la meilleure solutions
+  crossover retournes un enfants engendré par les 2 parents
+  mutation retournes l'enfant passé en paramètre mais muté
+  getValueWeigt retournes un tableau comportant la valeurs des sac a dos
+  bagcheck retournes un booleen suivant si les capacité des sac est depassé ou pas
+  bagcheckafteradd retournes un boolean suivant si la capacité des sac est depassé ou pas apres un ajouts
+  repair retournes l'enfant muté respectant les contraintes
+  getValue retournes la valeurs d'une solutions passé en parametre
   */
   int getValueWeight(vector<int>,int);
   int* find(Solutions);

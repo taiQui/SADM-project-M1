@@ -20,6 +20,18 @@ public:
   ~Solutions();
 
 //Getter
+/*
+    getNbsol retournes la valeurs de l'attributs _nbSolutions
+    getChoosen retournes la solutions se trouvant a l'index passé en paramètre
+    getObjectByIndex retournes si l'objet a l'index passé en parametre de la solutions a l'index passé en parametre, est utilisé ou passé
+    setCHoosenAtIndex place a l'index de la solutions passé en parametre l'elements passé en parametre a l'objets passé en parametre
+    setChoosen place a l'index donné en parametre la solutions donné en parametre
+    getValue retournes un tableau comprenant le score de toute les Solutions
+    getValueByIndex retournes le score de la solutions a l'index passé en parametre
+    getParent retournes les 2 parents choisis
+    belongTo retournes un booleen suivant si le vecteur passé en parametre appartient a l'ensemble des Solutions
+    generate genere un ensemble de solutions de manière aléatoire
+*/
 int getNbsol();
 vector<int> getChoosen(int);
 int getObjectByIndex(int,int);

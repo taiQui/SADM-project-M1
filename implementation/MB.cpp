@@ -86,7 +86,7 @@ vector<int> MB::crossover(vector<vector<int>*> parent){
   vector<int> random;
   vector<int> returned;
   for(int i = 0; i < this->_objectNumber ; i++){
-    random.push_back(rand()%1);
+    random.push_back(rand()%2);
   }
   for(int i = 0 ; i < this->_objectNumber; i++){
     if(random[i] == 1)
