@@ -1,6 +1,6 @@
 # Sac à dos multidimentionnel - Introduction
 
-Pour ce projet, nous devons résoudres de manière optimum le probleme du sac a dos multidimentionel. Nous avons choisis d'implementé la méta heuristique : algorithme génétique pour ce probleme.
+Pour ce projet, nous devons résoudres de manière optimal le probleme du sac a dos multidimentionel. Nous avons choisis d'implementé la méta heuristique : algorithme génétique pour ce probleme.
 
 Pour rappel, l'algorithme générique fonctionnes comme suit : 
 
