@@ -12,7 +12,7 @@
 
 using namespace std;
 //number of iteration
-#define T_MAX 10000000000
+#define T_MAX 100000
 
 int elapsedTime(clock_t);
 
