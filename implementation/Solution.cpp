@@ -2,7 +2,8 @@
 
 // Basic Constructor
 Solutions::Solutions(){
-    this->_nbSolutions = 100;
+  cout<<"Solutions Number : 15"<<endl;
+    this->_nbSolutions = 15;
 }
 
 // Special Constructor

@@ -11,7 +11,7 @@ using namespace std;
 
 class Solutions;
 
-#define RANDOM_FLIP 2
+#define RANDOM_FLIP 1
 
 //Multidimentionnal bag
 

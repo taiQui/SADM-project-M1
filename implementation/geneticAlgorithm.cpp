@@ -20,12 +20,28 @@ void geneticAlgorithm (int objectnumber, int bagnumber, vector<int> objectlist,v
   cout <<"Before executing algorithm, our first solutions is : "<<MultidimentionnalBackpack->getValue(best)<<endl;
   delete[] bestaux;
   best.clear();
+  int time_useless = 0;
   while(elapsedTime(start) < tm && compt < T_MAX ){
     // Get 2 parents from genetic algorithmique technique
-    vector<vector<int>*> parent = solutions.getParent(MultidimentionnalBackpack->getObjectList(),2);
+    // cout<<time_useless<<endl;
     vector<int> child;
+    if(time_useless > 8000){
+      cout<<"No more better solutions in 8000 iterations - BREAK"<<endl;
+      break;
+    } else if(time_useless > 1500){
+      vector<vector<int>*> parent = solutions.getParent(MultidimentionnalBackpack->getObjectList(),solutions.getNbsol()/2-1);
+      child = MultidimentionnalBackpack->crossover(parent);
+    } else if(time_useless > 1000){
+      vector<vector<int>*> parent = solutions.getParent(MultidimentionnalBackpack->getObjectList(),solutions.getNbsol()/4);
+      child = MultidimentionnalBackpack->crossover(parent);
+    } else if(time_useless > 500){
+      vector<vector<int>*> parent = solutions.getParent(MultidimentionnalBackpack->getObjectList(),solutions.getNbsol()/8);
+      child = MultidimentionnalBackpack->crossover(parent);
+    } else {
+      vector<vector<int>*> parent = solutions.getParent(MultidimentionnalBackpack->getObjectList(),2);
+      child = MultidimentionnalBackpack->crossover(parent);
+    }
     // Make a child with parents
-    child = MultidimentionnalBackpack->crossover(parent);
     // Mutate child
     child = MultidimentionnalBackpack->mutation(child);
     // Repair mutated child
@@ -41,13 +57,19 @@ void geneticAlgorithm (int objectnumber, int bagnumber, vector<int> objectlist,v
       // if it's true we swap better with our child
       if(solutions.getValueByIndex(bestandworst[1],MultidimentionnalBackpack->getObjectList()) < MultidimentionnalBackpack->getValue(child)){
         solutions.setChoosen(bestandworst[1],child);
+        time_useless = 0;
+      } else {
+        time_useless++;
       }
       // free pointer
       delete[] bestandworst;
+    } else {
+      time_useless++;
     }
     compt++;
   }
   if (elapsedTime(start)>=tm) cout<<"Time out ! "<<endl;
+  else cout<<"Execution time : "<<elapsedTime(start)<<"s"<<endl;
   bestaux = MultidimentionnalBackpack->find(solutions);
   // get best solutions from our list
   best = solutions.getChoosen(bestaux[1]);
